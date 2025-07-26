@@ -1,5 +1,8 @@
+import sys
+
+
 def get_book_text(filepath):
-    print("Analyzing book found at books/frankenstein.txt...")
+    print(f"Analyzing book found at {sys.argv[1]}...")
     with open(filepath) as file:
         return file.read()
 
@@ -9,8 +12,12 @@ from stats import get_number_of_characters_repeated, convert_to_sorted_list
 
 
 def main():
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
     print("============ BOOKBOT ============")
-    book_content = get_book_text("books/frankenstein.txt")
+    book_content = get_book_text(sys.argv[1])
     print("----------- Word Count ----------")
     number_of_words = get_number_of_words(book_content)
     print(f"Found {number_of_words} total words")
